@@ -142,7 +142,7 @@
 			    <version>${pagehelper.version}</version>
 			</dependency>		
 		  	<!-- Mybatis -->
-			<dependency>
+			<!-- <dependency>
 				<groupId>org.mybatis</groupId>
 				<artifactId>mybatis</artifactId>
 				<version>${mybatis.version}</version>
@@ -156,7 +156,13 @@
 				<groupId>com.github.miemiedev</groupId>
 				<artifactId>mybatis-paginator</artifactId>
 				<version>${mybatis.paginator.version}</version>
-			</dependency>		
+			</dependency>	 -->	
+			<!-- mp -->
+			<dependency>
+				<groupId>com.baomidou</groupId>
+				<artifactId>mybatis-plus</artifactId>
+				<version>2.3</version>
+			</dependency>
 			<!-- MySql -->
 			<dependency>
 				<groupId>mysql</groupId>

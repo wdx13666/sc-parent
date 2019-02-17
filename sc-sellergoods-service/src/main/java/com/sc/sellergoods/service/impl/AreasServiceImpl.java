@@ -1,107 +1,20 @@
 package com.sc.sellergoods.service.impl;
-import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.alibaba.dubbo.config.annotation.Service;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.sc.entity.PageResult;
-import com.sc.mapper.TbAreasMapper;
-import com.sc.pojo.TbAreas;
-import com.sc.pojo.TbAreasExample;
-import com.sc.pojo.TbAreasExample.Criteria;
+import com.sc.pojo.Areas;
 import com.sc.sellergoods.service.AreasService;
+import com.sc.mapper.AreasMapper;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
 
 /**
- * 服务实现层
- * @author Administrator
+ * <p>
+ * 行政区域县区信息表 服务实现类
+ * </p>
  *
+ * @author wdx
+ * @since 2019-02-17
  */
 @Service
-public class AreasServiceImpl implements AreasService {
+public class AreasServiceImpl extends ServiceImpl<AreasMapper, Areas> implements AreasService {
 
-	@Autowired
-	private TbAreasMapper areasMapper;
-	
-	/**
-	 * 查询全部
-	 */
-	@Override
-	public List<TbAreas> findAll() {
-		return areasMapper.selectByExample(null);
-	}
-
-	/**
-	 * 按分页查询
-	 */
-	@Override
-	public PageResult findPage(int pageNum, int pageSize) {
-		PageHelper.startPage(pageNum, pageSize);		
-		Page<TbAreas> page=   (Page<TbAreas>) areasMapper.selectByExample(null);
-		return new PageResult(page.getTotal(), page.getResult());
-	}
-
-	/**
-	 * 增加
-	 */
-	@Override
-	public void add(TbAreas areas) {
-		areasMapper.insert(areas);		
-	}
-
-	
-	/**
-	 * 修改
-	 */
-	@Override
-	public void update(TbAreas areas){
-		areasMapper.updateByPrimaryKey(areas);
-	}	
-	
-	/**
-	 * 根据ID获取实体
-	 * @param id
-	 * @return
-	 */
-	@Override
-	public TbAreas findOne(Long id){
-		return areasMapper.selectByPrimaryKey(id);
-	}
-
-	/**
-	 * 批量删除
-	 */
-	@Override
-	public void delete(Long[] ids) {
-		for(Long id:ids){
-			areasMapper.deleteByPrimaryKey(id);
-		}		
-	}
-	
-	
-		@Override
-	public PageResult findPage(TbAreas areas, int pageNum, int pageSize) {
-		PageHelper.startPage(pageNum, pageSize);
-		
-		TbAreasExample example=new TbAreasExample();
-		Criteria criteria = example.createCriteria();
-		
-		if(areas!=null){			
-						if(areas.getAreaid()!=null && areas.getAreaid().length()>0){
-				criteria.andAreaidLike("%"+areas.getAreaid()+"%");
-			}
-			if(areas.getArea()!=null && areas.getArea().length()>0){
-				criteria.andAreaLike("%"+areas.getArea()+"%");
-			}
-			if(areas.getCityid()!=null && areas.getCityid().length()>0){
-				criteria.andCityidLike("%"+areas.getCityid()+"%");
-			}
-	
-		}
-		
-		Page<TbAreas> page= (Page<TbAreas>)areasMapper.selectByExample(example);		
-		return new PageResult(page.getTotal(), page.getResult());
-	}
-	
 }

@@ -1,107 +1,20 @@
 package com.sc.sellergoods.service.impl;
-import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.alibaba.dubbo.config.annotation.Service;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.sc.entity.PageResult;
-import com.sc.mapper.TbCitiesMapper;
-import com.sc.pojo.TbCities;
-import com.sc.pojo.TbCitiesExample;
-import com.sc.pojo.TbCitiesExample.Criteria;
+import com.sc.pojo.Cities;
 import com.sc.sellergoods.service.CitiesService;
+import com.sc.mapper.CitiesMapper;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
 
 /**
- * 服务实现层
- * @author Administrator
+ * <p>
+ * 行政区域地州市信息表 服务实现类
+ * </p>
  *
+ * @author wdx
+ * @since 2019-02-17
  */
 @Service
-public class CitiesServiceImpl implements CitiesService {
+public class CitiesServiceImpl extends ServiceImpl<CitiesMapper, Cities> implements CitiesService {
 
-	@Autowired
-	private TbCitiesMapper citiesMapper;
-	
-	/**
-	 * 查询全部
-	 */
-	@Override
-	public List<TbCities> findAll() {
-		return citiesMapper.selectByExample(null);
-	}
-
-	/**
-	 * 按分页查询
-	 */
-	@Override
-	public PageResult findPage(int pageNum, int pageSize) {
-		PageHelper.startPage(pageNum, pageSize);		
-		Page<TbCities> page=   (Page<TbCities>) citiesMapper.selectByExample(null);
-		return new PageResult(page.getTotal(), page.getResult());
-	}
-
-	/**
-	 * 增加
-	 */
-	@Override
-	public void add(TbCities cities) {
-		citiesMapper.insert(cities);		
-	}
-
-	
-	/**
-	 * 修改
-	 */
-	@Override
-	public void update(TbCities cities){
-		citiesMapper.updateByPrimaryKey(cities);
-	}	
-	
-	/**
-	 * 根据ID获取实体
-	 * @param id
-	 * @return
-	 */
-	@Override
-	public TbCities findOne(Long id){
-		return citiesMapper.selectByPrimaryKey(id);
-	}
-
-	/**
-	 * 批量删除
-	 */
-	@Override
-	public void delete(Long[] ids) {
-		for(Long id:ids){
-			citiesMapper.deleteByPrimaryKey(id);
-		}		
-	}
-	
-	
-		@Override
-	public PageResult findPage(TbCities cities, int pageNum, int pageSize) {
-		PageHelper.startPage(pageNum, pageSize);
-		
-		TbCitiesExample example=new TbCitiesExample();
-		Criteria criteria = example.createCriteria();
-		
-		if(cities!=null){			
-						if(cities.getCityid()!=null && cities.getCityid().length()>0){
-				criteria.andCityidLike("%"+cities.getCityid()+"%");
-			}
-			if(cities.getCity()!=null && cities.getCity().length()>0){
-				criteria.andCityLike("%"+cities.getCity()+"%");
-			}
-			if(cities.getProvinceid()!=null && cities.getProvinceid().length()>0){
-				criteria.andProvinceidLike("%"+cities.getProvinceid()+"%");
-			}
-	
-		}
-		
-		Page<TbCities> page= (Page<TbCities>)citiesMapper.selectByExample(example);		
-		return new PageResult(page.getTotal(), page.getResult());
-	}
-	
 }

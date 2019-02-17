@@ -1,4 +1,5 @@
 package com.sc.manager.controller;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RequestBody;
@@ -6,9 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.sc.entity.PageResult;
 import com.sc.entity.Result;
-import com.sc.pojo.TbSeller;
+import com.sc.pojo.Brand;
+import com.sc.pojo.Seller;
 import com.sc.sellergoods.service.SellerService;
 /**
  * controller
@@ -27,8 +31,8 @@ public class SellerController {
 	 * @return
 	 */
 	@RequestMapping("/findAll")
-	public List<TbSeller> findAll(){			
-		return sellerService.findAll();
+	public List<Seller> findAll(){			
+		return sellerService.selectList(null);
 	}
 	
 	
@@ -38,7 +42,8 @@ public class SellerController {
 	 */
 	@RequestMapping("/findPage")
 	public PageResult  findPage(int page,int rows){			
-		return sellerService.findPage(page, rows);
+		Page<Seller> pages = sellerService.selectPage(new Page<Seller>(page, rows));
+		return new PageResult(pages.getTotal(), pages.getRecords());
 	}
 	
 	/**
@@ -47,9 +52,9 @@ public class SellerController {
 	 * @return
 	 */
 	@RequestMapping("/add")
-	public Result add(@RequestBody TbSeller seller){
+	public Result add(@RequestBody Seller seller){
 		try {
-			sellerService.add(seller);
+			sellerService.insert(seller);
 			return new Result(true, "增加成功");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -63,9 +68,9 @@ public class SellerController {
 	 * @return
 	 */
 	@RequestMapping("/update")
-	public Result update(@RequestBody TbSeller seller){
+	public Result update(@RequestBody Seller seller){
 		try {
-			sellerService.update(seller);
+			sellerService.updateById(seller);
 			return new Result(true, "修改成功");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -79,8 +84,8 @@ public class SellerController {
 	 * @return
 	 */
 	@RequestMapping("/findOne")
-	public TbSeller findOne(String id){
-		return sellerService.findOne(id);		
+	public Seller findOne(String id){
+		return sellerService.selectById(id);		
 	}
 	
 	/**
@@ -91,7 +96,7 @@ public class SellerController {
 	@RequestMapping("/delete")
 	public Result delete(Long [] ids){
 		try {
-			sellerService.delete(ids);
+			sellerService.deleteBatchIds(Arrays.asList(ids));
 			return new Result(true, "删除成功"); 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -107,8 +112,9 @@ public class SellerController {
 	 * @return
 	 */
 	@RequestMapping("/search")
-	public PageResult search(@RequestBody TbSeller seller, int page, int rows  ){
-		return sellerService.findPage(seller, page, rows);		
+	public PageResult search(@RequestBody Seller seller, int page, int rows  ){
+		Page<Seller> pages = sellerService.selectPage(new Page<Seller>(page, rows),new EntityWrapper<Seller>(seller));
+		return new PageResult(pages.getTotal(), pages.getRecords());
 	}
 	
 	
@@ -118,7 +124,7 @@ public class SellerController {
 	 * @param sellerId 商家ID
 	 * @param status 状态
 	 */
-	@RequestMapping("/updateStatus")
+	/*@RequestMapping("/updateStatus")
 	public Result updateStatus(String sellerId, String status){
 		try {
 			sellerService.updateStatus(sellerId, status);
@@ -127,5 +133,5 @@ public class SellerController {
 			e.printStackTrace();
 			return new Result(false, "失败");
 		}
-	}
+	}*/
 }

@@ -13,7 +13,7 @@
 		    <artifactId>pagehelper</artifactId>	   
 		</dependency>	
  		<!-- Mybatis -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
 		</dependency>
@@ -24,17 +24,22 @@
 		<dependency>
 			<groupId>com.github.miemiedev</groupId>
 			<artifactId>mybatis-paginator</artifactId>
-		</dependency>		
+		</dependency> -->	
+		<!-- mp -->	
+		<!-- <dependency>
+				<groupId>com.baomidou</groupId>
+				<artifactId>mybatis-plus</artifactId>
+			</dependency> -->
 		<!-- MySql -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 		<!-- 连接池 -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
-		</dependency>	
+		</dependency>	 -->
 		<dependency>
 			<groupId>com.sc</groupId>
 			<artifactId>sc-pojo</artifactId>

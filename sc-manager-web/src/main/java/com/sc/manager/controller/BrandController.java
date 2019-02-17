@@ -1,15 +1,17 @@
 package com.sc.manager.controller;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.sc.entity.PageResult;
 import com.sc.entity.Result;
-import com.sc.pojo.TbBrand;
+import com.sc.pojo.Brand;
 import com.sc.sellergoods.service.BrandService;
 /**
  * controller
@@ -28,8 +30,8 @@ public class BrandController {
 	 * @return
 	 */
 	@RequestMapping("/findAll")
-	public List<TbBrand> findAll(){			
-		return brandService.findAll();
+	public List<Brand> findAll(){			
+		return brandService.selectList(null);
 	}
 	
 	
@@ -38,8 +40,9 @@ public class BrandController {
 	 * @return
 	 */
 	@RequestMapping("/findPage")
-	public PageResult  findPage(int page,int rows){			
-		return brandService.findPage(page, rows);
+	public PageResult  findPage(int page,int rows){	
+		Page<Brand> pages = brandService.selectPage(new Page<Brand>(page, rows));
+		return new PageResult(pages.getTotal(), pages.getRecords());
 	}
 	
 	/**
@@ -48,9 +51,9 @@ public class BrandController {
 	 * @return
 	 */
 	@RequestMapping("/add")
-	public Result add(@RequestBody TbBrand brand){
+	public Result add(@RequestBody Brand brand){
 		try {
-			brandService.add(brand);
+			brandService.insert(brand);
 			return new Result(true, "增加成功");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -64,9 +67,9 @@ public class BrandController {
 	 * @return
 	 */
 	@RequestMapping("/update")
-	public Result update(@RequestBody TbBrand brand){
+	public Result update(@RequestBody Brand brand){
 		try {
-			brandService.update(brand);
+			brandService.updateById(brand);
 			return new Result(true, "修改成功");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -80,8 +83,8 @@ public class BrandController {
 	 * @return
 	 */
 	@RequestMapping("/findOne")
-	public TbBrand findOne(Long id){
-		return brandService.findOneById(id);		
+	public Brand findOne(Long id){
+		return brandService.selectById(id);		
 	}
 	
 	/**
@@ -92,7 +95,7 @@ public class BrandController {
 	@RequestMapping("/delete")
 	public Result delete(Long [] ids){
 		try {
-			brandService.delete(ids);
+			brandService.deleteBatchIds(Arrays.asList(ids));
 			return new Result(true, "删除成功"); 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -108,14 +111,15 @@ public class BrandController {
 	 * @return
 	 */
 	@RequestMapping("/search")
-	public PageResult search(@RequestBody TbBrand brand, int page, int rows  ){
-		return brandService.findPage(brand, page, rows);		
+	public PageResult search(@RequestBody Brand brand, int page, int rows  ){
+		Page<Brand> pages = brandService.selectPage(new Page<Brand>(page, rows),new EntityWrapper<Brand>(brand));
+		return new PageResult(pages.getTotal(), pages.getRecords());
 	}
 	
 	
-	@RequestMapping("/selectOptionList")
+	/*@RequestMapping("/selectOptionList")
 	public List<Map> selectOptionList() {
 		return brandService.selectOptionList();
-	}
+	}*/
 
 }
