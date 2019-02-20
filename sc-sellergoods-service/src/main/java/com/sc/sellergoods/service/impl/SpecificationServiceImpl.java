@@ -1,5 +1,8 @@
 package com.sc.sellergoods.service.impl;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.dubbo.config.annotation.Service;
@@ -35,6 +38,11 @@ public class SpecificationServiceImpl extends ServiceImpl<SpecificationMapper, S
 			mapper.insert(specificationOption);
 		}
 		
+	}
+
+	@Override
+	public List<Map> selectOptionList() {
+		return baseMapper.selectOptionList();
 	}
 
 }

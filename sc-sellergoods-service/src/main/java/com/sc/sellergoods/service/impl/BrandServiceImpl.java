@@ -1,10 +1,13 @@
 package com.sc.sellergoods.service.impl;
 
-import com.sc.pojo.Brand;
-import com.sc.sellergoods.service.BrandService;
-import com.sc.mapper.BrandMapper;
+import java.util.List;
+import java.util.Map;
+
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.sc.mapper.BrandMapper;
+import com.sc.pojo.Brand;
+import com.sc.sellergoods.service.BrandService;
 
 /**
  * <p>
@@ -16,5 +19,10 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
  */
 @Service
 public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements BrandService {
+
+	@Override
+	public List<Map> selectOptionList() {
+		return baseMapper.selectOptionList();
+	}
 
 }

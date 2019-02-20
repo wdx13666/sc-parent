@@ -1,5 +1,6 @@
 package com.sc.sellergoods.service;
 
+import com.sc.entity.GoodsZ;
 import com.sc.pojo.Goods;
 import com.baomidou.mybatisplus.service.IService;
 
@@ -12,5 +13,7 @@ import com.baomidou.mybatisplus.service.IService;
  * @since 2019-02-17
  */
 public interface GoodsService extends IService<Goods> {
+
+	public void add(GoodsZ goodsZ);
 
 }

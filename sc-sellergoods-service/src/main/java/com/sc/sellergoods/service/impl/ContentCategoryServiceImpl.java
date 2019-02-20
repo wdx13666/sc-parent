@@ -3,8 +3,8 @@ package com.sc.sellergoods.service.impl;
 import com.sc.pojo.ContentCategory;
 import com.sc.sellergoods.service.ContentCategoryService;
 import com.sc.mapper.ContentCategoryMapper;
+import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
 
 /**
  * <p>

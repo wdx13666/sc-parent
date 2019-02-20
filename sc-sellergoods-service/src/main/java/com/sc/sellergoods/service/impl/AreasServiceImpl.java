@@ -3,8 +3,8 @@ package com.sc.sellergoods.service.impl;
 import com.sc.pojo.Areas;
 import com.sc.sellergoods.service.AreasService;
 import com.sc.mapper.AreasMapper;
+import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
 
 /**
  * <p>

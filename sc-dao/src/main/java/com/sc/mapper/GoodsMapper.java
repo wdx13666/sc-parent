@@ -12,5 +12,5 @@ import com.sc.pojo.Goods;
  * @since 2019-02-17
  */
 public interface GoodsMapper extends BaseMapper<Goods> {
-
+	public void add(Goods goods);
 }

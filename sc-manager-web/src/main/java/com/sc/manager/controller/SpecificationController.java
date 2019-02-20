@@ -2,6 +2,7 @@ package com.sc.manager.controller;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -81,13 +82,14 @@ public class SpecificationController {
 	public Result update(@RequestBody Specifications specification) {
 		try {
 			specificationService.updateById(specification.getSpecification());
-			//删除原有的规格选项	
-			optionService.delete(new EntityWrapper<SpecificationOption>().eq("spec_id", specification.getSpecification().getId()));
-			//循环插入规格选项
-			for(SpecificationOption specificationOption:specification.getSpecificationOptionList()){			
+			// 删除原有的规格选项
+			optionService.delete(
+					new EntityWrapper<SpecificationOption>().eq("spec_id", specification.getSpecification().getId()));
+			// 循环插入规格选项
+			for (SpecificationOption specificationOption : specification.getSpecificationOptionList()) {
 				specificationOption.setSpecId(specification.getSpecification().getId());
-				optionService.insert(specificationOption);		
-			}	
+				optionService.insert(specificationOption);
+			}
 
 			return new Result(true, "修改成功");
 		} catch (Exception e) {
@@ -126,7 +128,7 @@ public class SpecificationController {
 	public Result delete(Long[] ids) {
 		try {
 			specificationService.deleteBatchIds(Arrays.asList(ids));
-			//删除原有的规格选项
+			// 删除原有的规格选项
 			for (Long id : ids) {
 				optionService.delete(new EntityWrapper<SpecificationOption>().eq("spec_id", id));
 			}
@@ -150,8 +152,12 @@ public class SpecificationController {
 	 * TbSpecification specification, int page, int rows ){ return
 	 * specificationService.findPage(specification, page, rows); }
 	 * 
-	 * @RequestMapping("/selectOptionList") public List<Map> selectOptionList(){
-	 * return specificationService.selectOptionList(); }
+	 *
 	 */
+
+	@RequestMapping("/selectOptionList")
+	public List<Map> selectOptionList() {
+		return specificationService.selectOptionList();
+	}
 
 }

@@ -11,7 +11,6 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.sc.entity.PageResult;
 import com.sc.entity.Result;
-import com.sc.pojo.Brand;
 import com.sc.pojo.Seller;
 import com.sc.sellergoods.service.SellerService;
 /**
@@ -54,6 +53,7 @@ public class SellerController {
 	@RequestMapping("/add")
 	public Result add(@RequestBody Seller seller){
 		try {
+			seller.setStatus("0");
 			sellerService.insert(seller);
 			return new Result(true, "增加成功");
 		} catch (Exception e) {
@@ -124,14 +124,16 @@ public class SellerController {
 	 * @param sellerId 商家ID
 	 * @param status 状态
 	 */
-	/*@RequestMapping("/updateStatus")
+	@RequestMapping("/updateStatus")
 	public Result updateStatus(String sellerId, String status){
 		try {
-			sellerService.updateStatus(sellerId, status);
+			Seller seller = sellerService.selectById(sellerId);
+			seller.setStatus(status);
+			sellerService.updateById(seller);
 			return new Result(true, "成功");
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new Result(false, "失败");
 		}
-	}*/
+	}
 }

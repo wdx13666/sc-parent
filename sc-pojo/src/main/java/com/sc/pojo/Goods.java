@@ -3,6 +3,8 @@ package com.sc.pojo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import com.baomidou.mybatisplus.annotations.TableLogic;
+
 /**
  * <p>
  * 
@@ -78,6 +80,7 @@ public class Goods  implements Serializable{
     /**
      * 是否删除
      */
+    @TableLogic
     private String isDelete;
 
 

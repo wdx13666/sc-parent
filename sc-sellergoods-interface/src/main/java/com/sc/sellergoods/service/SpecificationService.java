@@ -1,5 +1,8 @@
 package com.sc.sellergoods.service;
 
+import java.util.List;
+import java.util.Map;
+
 import com.baomidou.mybatisplus.service.IService;
 import com.sc.entity.Specifications;
 import com.sc.pojo.Specification;
@@ -14,4 +17,5 @@ import com.sc.pojo.Specification;
  */
 public interface SpecificationService extends IService<Specification> {
 	public void insertByO(Specifications specification);
+	public List<Map> selectOptionList();
 }

@@ -24,12 +24,12 @@
 	</bean>
 
 	<!-- 事务管理器 -->
-	<bean id="dataSourceTransactionManager"
+	<!-- <bean id="dataSourceTransactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
-	<!-- 基于注解的事务管理 -->
-	<tx:annotation-driven transaction-manager="dataSourceTransactionManager" />
+	基于注解的事务管理
+	<tx:annotation-driven transaction-manager="dataSourceTransactionManager" /> -->
 
 
 	<!-- 配置SqlSessionFactoryBean Mybatis提供的: org.mybatis.spring.SqlSessionFactoryBean 
@@ -84,7 +84,7 @@
 		<property name="sqlInjector" ref="logicSqlInjector"></property>
 
 		<!-- 注入逻辑删除全局值 -->
-		<property name="logicDeleteValue" value="-1"></property>
+		<property name="logicDeleteValue" value="0"></property>
 		
 		<property name="logicNotDeleteValue" value="1"></property>
 
