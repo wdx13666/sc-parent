@@ -302,5 +302,8 @@
 		<module>sc-sellergoods-service</module>
 		<module>sc-manager-web</module>
 		<module>sc-shop-web</module>
+		<module>sc-content-interface</module>
+		<module>sc-content-service</module>
+		<module>sc-portal-web</module>
 	</modules>
 </project>

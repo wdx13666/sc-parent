@@ -95,6 +95,11 @@
   		<artifactId>sc-sellergoods-interface</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
+  	<!-- <dependency>
+  		<groupId>com.sc</groupId>
+  		<artifactId>sc-content-interface</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency> -->
   </dependencies>
   <build>
 	 <plugins>

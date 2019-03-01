@@ -11,8 +11,9 @@
 
 	<dubbo:protocol name="dubbo" port="20881"></dubbo:protocol>
 	<dubbo:application name="sc-sellergoods-service" />
-	<dubbo:registry address="zookeeper://120.79.146.76:2181" />
+	<dubbo:registry address="zookeeper://120.79.146.76:2181"/>
 	<dubbo:annotation package="com.sc.sellergoods.service.impl" />
+	<dubbo:provider timeout="50000" />
 
 	<!-- 事务管理器 -->
 	<bean id="transactionManager"
