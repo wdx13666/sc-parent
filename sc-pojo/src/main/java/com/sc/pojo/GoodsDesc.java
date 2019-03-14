@@ -2,6 +2,8 @@ package com.sc.pojo;
 
 import java.io.Serializable;
 
+import com.baomidou.mybatisplus.annotations.TableId;
+
 /**
  * <p>
  * 
@@ -17,6 +19,7 @@ public class GoodsDesc  implements Serializable{
     /**
      * SPU_ID
      */
+    @TableId
     private Long goodsId;
     /**
      * 描述

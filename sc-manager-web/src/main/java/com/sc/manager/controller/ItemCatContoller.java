@@ -118,7 +118,7 @@ public class ItemCatContoller {
 	
 	@RequestMapping("/findByParentId")
 	public List<ItemCat> findByParentId(Long parentId){
-		return itemCatService.selectList(new EntityWrapper<ItemCat>().eq("parent_id", parentId));
+		return itemCatService.findByParentId(parentId);
 	}
 
 }

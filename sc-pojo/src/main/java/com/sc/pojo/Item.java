@@ -3,78 +3,85 @@ package com.sc.pojo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Map;
 
-/**
- * <p>
- * 商品表
- * </p>
- *
- * @author wdx
- * @since 2019-02-17
- */
-public class Item  implements Serializable{
+import org.apache.solr.client.solrj.beans.Field;
+import org.springframework.data.solr.core.mapping.Dynamic;
 
-    private static final long serialVersionUID = 1L;
+import com.baomidou.mybatisplus.annotations.TableField;
 
-    /**
-     * 商品id，同时也是商品编号
-     */
+public class Item implements Serializable{
+	
+	@Field
     private Long id;
-    /**
-     * 商品标题
-     */
+
+	@Field("item_title")
     private String title;
-    /**
-     * 商品卖点
-     */
+
     private String sellPoint;
-    /**
-     * 商品价格，单位为：元
-     */
+
+    @Field("item_price")
     private BigDecimal price;
+
     private Integer stockCount;
-    /**
-     * 库存数量
-     */
+
     private Integer num;
-    /**
-     * 商品条形码
-     */
+
     private String barcode;
-    /**
-     * 商品图片
-     */
+
+    @Field("item_image")
     private String image;
-    /**
-     * 所属类目，叶子类目
-     */
-    private Long categoryId;
-    /**
-     * 商品状态，1-正常，2-下架，3-删除
-     */
+
+    private Long categoryid;
+
     private String status;
-    /**
-     * 创建时间
-     */
+
     private Date createTime;
-    /**
-     * 更新时间
-     */
+
     private Date updateTime;
+
     private String itemSn;
+
     private BigDecimal costPirce;
+
     private BigDecimal marketPrice;
+
     private String isDefault;
+
+    @Field("item_goodsid")
     private Long goodsId;
+
     private String sellerId;
+
     private String cartThumbnail;
+
+    @Field("item_category")
     private String category;
+
+    @Field("item_brand")
     private String brand;
+
     private String spec;
+
+    @Field("item_seller")
     private String seller;
+    
+    @Dynamic
+    @Field("item_spec_*")
+    @TableField(exist=false)
+    private Map<String,String> specMap;
+    
+    public Map<String, String> getSpecMap() {
+		return specMap;
+	}
 
+	public void setSpecMap(Map<String, String> specMap) {
+		this.specMap = specMap;
+	}
+	
+	
 
-    public Long getId() {
+	public Long getId() {
         return id;
     }
 
@@ -87,7 +94,7 @@ public class Item  implements Serializable{
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.title = title == null ? null : title.trim();
     }
 
     public String getSellPoint() {
@@ -95,7 +102,7 @@ public class Item  implements Serializable{
     }
 
     public void setSellPoint(String sellPoint) {
-        this.sellPoint = sellPoint;
+        this.sellPoint = sellPoint == null ? null : sellPoint.trim();
     }
 
     public BigDecimal getPrice() {
@@ -127,7 +134,7 @@ public class Item  implements Serializable{
     }
 
     public void setBarcode(String barcode) {
-        this.barcode = barcode;
+        this.barcode = barcode == null ? null : barcode.trim();
     }
 
     public String getImage() {
@@ -135,15 +142,15 @@ public class Item  implements Serializable{
     }
 
     public void setImage(String image) {
-        this.image = image;
+        this.image = image == null ? null : image.trim();
     }
 
-    public Long getCategoryId() {
-        return categoryId;
+    public Long getCategoryid() {
+        return categoryid;
     }
 
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
+    public void setCategoryid(Long categoryid) {
+        this.categoryid = categoryid;
     }
 
     public String getStatus() {
@@ -151,7 +158,7 @@ public class Item  implements Serializable{
     }
 
     public void setStatus(String status) {
-        this.status = status;
+        this.status = status == null ? null : status.trim();
     }
 
     public Date getCreateTime() {
@@ -175,7 +182,7 @@ public class Item  implements Serializable{
     }
 
     public void setItemSn(String itemSn) {
-        this.itemSn = itemSn;
+        this.itemSn = itemSn == null ? null : itemSn.trim();
     }
 
     public BigDecimal getCostPirce() {
@@ -199,7 +206,7 @@ public class Item  implements Serializable{
     }
 
     public void setIsDefault(String isDefault) {
-        this.isDefault = isDefault;
+        this.isDefault = isDefault == null ? null : isDefault.trim();
     }
 
     public Long getGoodsId() {
@@ -215,7 +222,7 @@ public class Item  implements Serializable{
     }
 
     public void setSellerId(String sellerId) {
-        this.sellerId = sellerId;
+        this.sellerId = sellerId == null ? null : sellerId.trim();
     }
 
     public String getCartThumbnail() {
@@ -223,7 +230,7 @@ public class Item  implements Serializable{
     }
 
     public void setCartThumbnail(String cartThumbnail) {
-        this.cartThumbnail = cartThumbnail;
+        this.cartThumbnail = cartThumbnail == null ? null : cartThumbnail.trim();
     }
 
     public String getCategory() {
@@ -231,7 +238,7 @@ public class Item  implements Serializable{
     }
 
     public void setCategory(String category) {
-        this.category = category;
+        this.category = category == null ? null : category.trim();
     }
 
     public String getBrand() {
@@ -239,7 +246,7 @@ public class Item  implements Serializable{
     }
 
     public void setBrand(String brand) {
-        this.brand = brand;
+        this.brand = brand == null ? null : brand.trim();
     }
 
     public String getSpec() {
@@ -247,7 +254,7 @@ public class Item  implements Serializable{
     }
 
     public void setSpec(String spec) {
-        this.spec = spec;
+        this.spec = spec == null ? null : spec.trim();
     }
 
     public String getSeller() {
@@ -255,36 +262,6 @@ public class Item  implements Serializable{
     }
 
     public void setSeller(String seller) {
-        this.seller = seller;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Item{" +
-        ", id=" + id +
-        ", title=" + title +
-        ", sellPoint=" + sellPoint +
-        ", price=" + price +
-        ", stockCount=" + stockCount +
-        ", num=" + num +
-        ", barcode=" + barcode +
-        ", image=" + image +
-        ", categoryId=" + categoryId +
-        ", status=" + status +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        ", itemSn=" + itemSn +
-        ", costPirce=" + costPirce +
-        ", marketPrice=" + marketPrice +
-        ", isDefault=" + isDefault +
-        ", goodsId=" + goodsId +
-        ", sellerId=" + sellerId +
-        ", cartThumbnail=" + cartThumbnail +
-        ", category=" + category +
-        ", brand=" + brand +
-        ", spec=" + spec +
-        ", seller=" + seller +
-        "}";
+        this.seller = seller == null ? null : seller.trim();
     }
 }

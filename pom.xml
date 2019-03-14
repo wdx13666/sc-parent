@@ -305,5 +305,10 @@
 		<module>sc-content-interface</module>
 		<module>sc-content-service</module>
 		<module>sc-portal-web</module>
+		<module>sc-solr-util</module>
+		<module>sc-search-web</module>
+		<module>sc-page-web</module>
+		<module>sc-user-web</module>
+		<module>sc-cart-web</module>
 	</modules>
 </project>

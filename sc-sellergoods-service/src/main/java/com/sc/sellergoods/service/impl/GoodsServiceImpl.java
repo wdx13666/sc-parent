@@ -84,7 +84,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 	private void setItemValus(GoodsZ goodsZ,Item item) {
 		item.setGoodsId(goodsZ.getGoods().getId());//商品SPU编号
 		item.setSellerId(goodsZ.getGoods().getSellerId());//商家编号
-		item.setCategoryId(goodsZ.getGoods().getCategory3Id());//商品分类编号（3级）
+		item.setCategoryid(goodsZ.getGoods().getCategory3Id());//商品分类编号（3级）
 		item.setCreateTime(new Date());//创建日期
 		item.setUpdateTime(new Date());//修改日期 
 		

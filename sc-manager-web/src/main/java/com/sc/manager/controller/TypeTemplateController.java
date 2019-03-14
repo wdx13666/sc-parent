@@ -43,8 +43,8 @@ public class TypeTemplateController {
 	 */
 	@RequestMapping("/findPage")
 	public PageResult  findPage(int page,int rows){	
-		Page<TypeTemplate> pages = templateService.selectPage(new Page<TypeTemplate>(page, rows));
-		return new PageResult(pages.getTotal(), pages.getRecords());
+		
+		return templateService.findPage(page, rows);
 	}
 	
 	/**

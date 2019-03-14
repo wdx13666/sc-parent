@@ -11,7 +11,7 @@
 
 	<dubbo:protocol name="dubbo" port="20881"></dubbo:protocol>
 	<dubbo:application name="sc-sellergoods-service" />
-	<dubbo:registry address="zookeeper://120.79.146.76:2181"/>
+	<dubbo:registry address="zookeeper://120.79.146.76:2181" />
 	<dubbo:annotation package="com.sc.sellergoods.service.impl" />
 	<dubbo:provider timeout="50000" />
 
@@ -23,4 +23,16 @@
 	<!-- 开启事务控制的注解支持 -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
+	<bean id="freemarkerConfig"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPath" value="/WEB-INF/ftl/" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+	
+	<bean id="idWorker" class="com.sc.utils.IdWorker">
+    	<!-- 进程ID -->
+    	<constructor-arg index="0" value="0"></constructor-arg>
+    	<!-- 数据中心ID -->
+    	<constructor-arg index="1" value="0"></constructor-arg>
+ </bean>
 </beans>

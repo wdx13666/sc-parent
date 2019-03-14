@@ -3,6 +3,9 @@ package com.sc.pojo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.enums.IdType;
+
 /**
  * <p>
  * 
@@ -15,6 +18,7 @@ public class OrderItem   implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
+    @TableId(type=IdType.INPUT)
     private Long id;
     /**
      * 商品id

@@ -1,7 +1,7 @@
 package com.sc.sellergoods.service.impl;
 
-import org.springframework.stereotype.Service;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.sc.mapper.AddressMapper;
 import com.sc.pojo.Address;

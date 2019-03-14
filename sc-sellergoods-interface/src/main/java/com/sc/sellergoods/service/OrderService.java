@@ -1,7 +1,7 @@
 package com.sc.sellergoods.service;
 
-import com.sc.pojo.Order;
 import com.baomidou.mybatisplus.service.IService;
+import com.sc.pojo.Order;
 
 /**
  * <p>
@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.service.IService;
  */
 public interface OrderService extends IService<Order> {
 
+	public void add(Order order);
 }
